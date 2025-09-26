@@ -49,7 +49,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ darkMode, toggleDarkMode }) =
             ))}
           </nav>
 
-          {/* New Features Section - Icon on top */}
+          {/* New Features */}
           <div className="mt-20 bg-[#F8F8F8] dark:bg-gray-800 rounded-lg p-4 flex flex-col items-center">
             <ScanFace size={32} className="text-gray-600 dark:text-gray-300 mb-2" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-200 text-center">New Features</span>
@@ -58,6 +58,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ darkMode, toggleDarkMode }) =
 
         {/* Bottom Section - Theme Toggle and Logout */}
         <div className="space-y-4 mt-8">
+
           {/* Theme Toggle */}
           <div className="bg-[#F8F8F8] dark:bg-gray-800 rounded-lg p-3 flex items-center justify-center space-x-6">
             <button
@@ -76,7 +77,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ darkMode, toggleDarkMode }) =
             </button>
           </div>
 
-          {/* Logout Button - Icon beside text */}
+          {/* Logout Button  */}
           <button className="w-full flex items-center justify-center px-4 py-3 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors">
             <LogOut size={20} className="mr-2" />
             <span className="text-sm font-medium">Logout</span>

@@ -12,17 +12,17 @@ import {
 } from 'lucide-react';
 
 interface MobileSidebarProps {
-  darkMode: boolean;
-  toggleDarkMode: () => void;
   isOpen: boolean;
   onClose: () => void;
+  darkMode: boolean;
+  toggleDarkMode: () => void;
 }
 
 const MobileSidebar: React.FC<MobileSidebarProps> = ({ 
-  darkMode, 
-  toggleDarkMode, 
   isOpen, 
-  onClose 
+  onClose, 
+  darkMode, 
+  toggleDarkMode 
 }) => {
   const navItems = [
     { icon: Home, label: 'Home', active: true },
@@ -34,44 +34,44 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
   return (
     <>
       {/* Overlay */}
-      {isOpen && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
-          onClick={onClose}
-        />
-      )}
+      <div 
+        className={`fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity duration-300 md:hidden ${
+          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={onClose}
+      />
       
       {/* Sidebar */}
-      <div className={`
-        fixed top-0 left-0 h-full w-80 bg-white dark:bg-black border-r border-gray-200 dark:border-gray-800 
-        transform transition-transform duration-300 ease-in-out z-50 lg:hidden
-        ${isOpen ? 'translate-x-0' : '-translate-x-full'}
-      `}>
+      <div 
+        className={`fixed top-0 left-0 h-full w-64 bg-white dark:bg-black border-r border-gray-200 dark:border-gray-800 flex flex-col z-50 transform transition-transform duration-300 ease-in-out md:hidden ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
         {/* Header */}
-        <div className="p-6 border-b border-gray-200 dark:border-gray-800 flex justify-between items-center">
-          <img src="/logo.png" alt="Midoman" className="h-12 w-auto" />
+        <div className="p-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
+          <img src="/logo.png" alt="Midoman" className="h-8 w-auto" />
           <button 
             onClick={onClose}
-            className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           >
-            <X size={24} className="text-gray-600 dark:text-gray-300" />
+            <X size={20} className="text-gray-600 dark:text-gray-300" />
           </button>
         </div>
 
         {/* Navigation */}
-        <div className="flex-1 p-4 flex flex-col justify-between h-[calc(100%-80px)]">
+        <div className="flex-1 p-4 flex flex-col justify-start overflow-y-auto">
           <div>
-            <nav className="space-y-2 mt-6">
+            <nav className="space-y-2 mt-4">
               {navItems.map((item) => (
                 <div
                   key={item.label}
-                  className={`flex items-center px-4 py-5 rounded-xl transition-colors cursor-pointer ${
+                  className={`flex items-center px-4 py-3 rounded-xl transition-colors cursor-pointer ${
                     item.active 
                       ? 'bg-[#0660D3] text-white' 
                       : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                   }`}
                 >
-                  <item.icon size={24} className="mr-3" />
+                  <item.icon size={20} className="mr-3" />
                   <span className="text-sm font-medium">{item.label}</span>
                 </div>
               ))}
@@ -79,13 +79,13 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
 
             {/* New Features Section */}
             <div className="mt-8 bg-[#F8F8F8] dark:bg-gray-800 rounded-lg p-4 flex flex-col items-center">
-              <ScanFace size={32} className="text-gray-600 dark:text-gray-300 mb-2" />
+              <ScanFace size={28} className="text-gray-600 dark:text-gray-300 mb-2" />
               <span className="text-sm font-medium text-gray-700 dark:text-gray-200 text-center">New Features</span>
             </div>
           </div>
 
-          {/* Bottom Section */}
-          <div className="space-y-4 mt-8">
+          {/* Bottom Section - Theme Toggle and Logout */}
+          <div className="space-y-4 mt-14 pb-4">
             {/* Theme Toggle */}
             <div className="bg-[#F8F8F8] dark:bg-gray-800 rounded-lg p-3 flex items-center justify-center space-x-6">
               <button
@@ -93,20 +93,20 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
                 className={`p-2 rounded-full ${!darkMode ? 'bg-blue-100 text-blue-600' : 'text-gray-600 dark:text-gray-300'}`}
                 aria-label="Light mode"
               >
-                <Sun size={20} />
+                <Sun size={18} />
               </button>
               <button
                 onClick={toggleDarkMode}
                 className={`p-2 rounded-full ${darkMode ? 'bg-blue-100 text-blue-600' : 'text-gray-600 dark:text-gray-300'}`}
                 aria-label="Dark mode"
               >
-                <Moon size={20} />
+                <Moon size={18} />
               </button>
             </div>
 
             {/* Logout Button */}
             <button className="w-full flex items-center justify-center px-4 py-3 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors">
-              <LogOut size={20} className="mr-2" />
+              <LogOut size={18} className="mr-2" />
               <span className="text-sm font-medium">Logout</span>
             </button>
           </div>
